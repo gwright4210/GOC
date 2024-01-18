@@ -1,8 +1,7 @@
-class Shooter extends Invader {
+class MiniBoss extends Invader {
 
     long mark, wait = 1200; // ms
-    long bdelay = 3000;
-    Shooter(float x, float y) {
+    MiniBoss(float x, float y) {
         super(x, y);
         mark = millis();
     }
@@ -15,7 +14,7 @@ class Shooter extends Invader {
 
         if(millis() - mark > wait) {
             mark = millis();
-            _SM.spawn(new Bullet(pos, aim, team));
+            _SM.spawn(new BigBullet(pos, aim, team));
         }
     }
 }

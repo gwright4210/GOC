@@ -1,5 +1,6 @@
 class Player extends Sprite {
-    boolean left, right, up, down;
+    boolean left, right, up, down, chargeShot = false;
+    long mark, wait = 3000;
     
     Player(float x, float y) {
         // super refers to the parent
@@ -26,7 +27,13 @@ class Player extends Sprite {
 
         // always try to decelerate
         vel.mult(0.9);
+        
+        if(chargeShot == true) {
+          mark = millis(); 
+        }
     }
+    
+  
 
     @Override
     void display() {
@@ -49,6 +56,7 @@ class Player extends Sprite {
             case 'D': right = false; break;
             case 'w':
             case 'W': up = false; break;
+            
         }
     }
     void keyDown() {
@@ -62,12 +70,23 @@ class Player extends Sprite {
             case 'w':
             case 'W': up = true; break;
             case ' ':
-            case 'f': fire(); break;
+            case 'f': smallshot(); break;
+            case 'b':
+            case 'B': bigshot(); break;
         }
     }
-
-    void fire() {
-        PVector aim = new PVector(0, -10); // up
+   
+    void smallshot() {
+      PVector aim = new PVector(0, -10); // up
         _SM.spawn(new Bullet(pos.x, pos.y, aim, team));
+      //long delay = 3000; // 3 seconds
+      //if (millis() - mark < delay) {
     }
+    void bigshot() {
+      PVector aim = new PVector(0, -10); // up
+        _SM.spawn(new BigBullet(pos.x, pos.y, aim, team));
+      //long delay = 3000; // 3 seconds
+      //if (millis() - mark < delay) {
+    }
+    
 }
