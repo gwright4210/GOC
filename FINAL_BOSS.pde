@@ -1,7 +1,7 @@
-class Boss extends Invader {
-    int collisions, collisionsAllowed = 2;
+class FinalBoss extends Invader {
+
     long mark, wait = 50; // ms
-    Boss(float x, float y) {
+    FinalBoss(float x, float y) {
         super(x, y);
         mark = millis();
     }
@@ -14,15 +14,7 @@ class Boss extends Invader {
 
         if(millis() - mark > wait) {
             mark = millis();
-            _SM.spawn(new Bullet(pos, aim, team));
+            _SM.spawn(new BigBullet(pos, aim, team));
         }
-        
-    }
-    @Override
-    void handleCollision(){
-      collisions += 1;
-      if(collisions > collisionsAllowed){
-        _SM.destroy(this);
-      }
     }
 }

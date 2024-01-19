@@ -6,6 +6,14 @@ class Player extends Sprite {
     long shotdelay = 300;
     int lives = 3;
    
+    void healthbar(){
+      int x = 10;
+      for(int i = 0; i < lives; i++){
+        rect(x, 8, 22, 22);
+        x += 40;
+      }
+    }
+    
     
     Player(float x, float y) {
         // super refers to the parent
@@ -15,6 +23,7 @@ class Player extends Sprite {
         mark = millis();
         smallmark = millis();
         //playerArt = loadImage("GOCSpriteSheet/Dude_Monster");
+        
     }
 
     @Override
@@ -35,14 +44,18 @@ class Player extends Sprite {
 
         // always try to decelerate
         vel.mult(0.9);
+        //image(playerArt, 0, height/2, playerArt.width/2, playerArt.height/2);
+        
     }
     
   
 
     @Override
     void display() {
+        
         fill(200, 0, 200);
         ellipse(pos.x, pos.y, size.x, size.y);
+        healthbar();
     }
 
     @Override
@@ -51,6 +64,7 @@ class Player extends Sprite {
        if(lives < 0){
          _SM.destroy(this);
        }
+       
        
     }
 
@@ -87,6 +101,7 @@ class Player extends Sprite {
             case 'L': lazer(); break;
             case 'o':
             case 'O': supersecretspawner(); break;
+            case '0': setup(); break;
         }
     }
    
@@ -125,6 +140,6 @@ class Player extends Sprite {
       }
     }
     void supersecretspawner(){
-       _SM.spawn(new Invader(150, 150));
+       _SM.spawn(new Shooter(150, 150));
     }
 }
