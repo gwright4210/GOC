@@ -1,4 +1,5 @@
 class Player extends Sprite {
+    //PImage playerArt;
     boolean left, right, up, down, chargeShot = false;
     long mark, smallmark, wait = 3000;
     long lazerdelay = 10000;
@@ -13,6 +14,7 @@ class Player extends Sprite {
         team = 1;
         mark = millis();
         smallmark = millis();
+        //playerArt = loadImage("GOCSpriteSheet/Dude_Monster");
     }
 
     @Override
