@@ -1,4 +1,6 @@
 class BigBullet extends Sprite {
+    int collisions, collisionsAllowed = 3;
+    
     
     BigBullet(float x, float y, PVector velocity, int team) {
         super(x, y, 120, 40); // invoke parent constructor
@@ -12,7 +14,14 @@ class BigBullet extends Sprite {
         // this refers to the above on line 3
     }
     
-    
+    @Override
+    void handleCollision(){
+      collisions += 1;
+      if(collisionsAllowed < collisions){
+        _SM.destroy(this);
+      }
+      
+    }
     
     @Override
     void update() {
