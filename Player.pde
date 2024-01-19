@@ -14,7 +14,6 @@ class Player extends Sprite {
       }
     }
     
-    
     Player(float x, float y) {
         // super refers to the parent
         // ... I use it here as a constructor
@@ -22,8 +21,7 @@ class Player extends Sprite {
         team = 1;
         mark = millis();
         smallmark = millis();
-        //playerArt = loadImage("GOCSpriteSheet/Dude_Monster");
-        
+        //playerArt = loadImage("GOCSpriteSheet/Dude_Monster");   
     }
 
     @Override
@@ -35,7 +33,6 @@ class Player extends Sprite {
         if (down)  vel.add(new PVector(0, speed));
         // update the position by velocity
         pos.add(vel);
-
         //fix bounds
         if(pos.x < 0 + size.x/2) pos.x = size.x/2;
         if(pos.x > width - size.x/2) pos.x = width - size.x/2;
@@ -45,14 +42,10 @@ class Player extends Sprite {
         // always try to decelerate
         vel.mult(0.9);
         //image(playerArt, 0, height/2, playerArt.width/2, playerArt.height/2);
-        
     }
-    
-  
-
+ 
     @Override
     void display() {
-        
         fill(200, 0, 200);
         ellipse(pos.x, pos.y, size.x, size.y);
         healthbar();
@@ -63,9 +56,7 @@ class Player extends Sprite {
        lives -= 1;
        if(lives < 0){
          _SM.destroy(this);
-       }
-       
-       
+       }     
     }
 
     void keyUp() {
@@ -77,8 +68,7 @@ class Player extends Sprite {
             case 'd':
             case 'D': right = false; break;
             case 'w':
-            case 'W': up = false; break;
-            
+            case 'W': up = false; break;          
         }
     }
     void keyDown() {
@@ -114,6 +104,7 @@ class Player extends Sprite {
       //long delay = 3000; // 3 seconds
       //if (millis() - mark < delay) {
     }
+    
     void bigshot() {
       if(millis() - mark > wait){
       PVector aim = new PVector(0, -10); // up
@@ -121,6 +112,7 @@ class Player extends Sprite {
         mark = millis();
       }
     }
+    
     void clustershot(){
       if(millis() - mark > wait){
       PVector aimup = new PVector(0, -5); // up
@@ -132,6 +124,7 @@ class Player extends Sprite {
         mark = millis();
       }
     }
+    
     void lazer() { //i still want to make it so it will go through anything
       if(millis() - mark > lazerdelay){
       PVector aim = new PVector(0, -80); // up
@@ -139,6 +132,7 @@ class Player extends Sprite {
         mark = millis();
       }
     }
+    
     void supersecretspawner(){
        _SM.spawn(new Shooter(150, 150));
     }
