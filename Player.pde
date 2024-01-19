@@ -1,12 +1,15 @@
 class Player extends Sprite {
     boolean left, right, up, down, chargeShot = false;
     long mark, wait = 3000;
+   
+   
     
     Player(float x, float y) {
         // super refers to the parent
         // ... I use it here as a constructor
         super(x, y, 40, 40); // in this case, Sprite
         team = 1;
+        mark = millis();
     }
 
     @Override
@@ -27,10 +30,6 @@ class Player extends Sprite {
 
         // always try to decelerate
         vel.mult(0.9);
-        
-        if(chargeShot == true) {
-          mark = millis(); 
-        }
     }
     
   
@@ -73,6 +72,8 @@ class Player extends Sprite {
             case 'f': smallshot(); break;
             case 'b':
             case 'B': bigshot(); break;
+            case 'c':
+            case 'C': clustershot(); break;
         }
     }
    
@@ -83,10 +84,29 @@ class Player extends Sprite {
       //if (millis() - mark < delay) {
     }
     void bigshot() {
+      if(millis() - mark > wait){
       PVector aim = new PVector(0, -10); // up
         _SM.spawn(new BigBullet(pos.x, pos.y, aim, team));
-      //long delay = 3000; // 3 seconds
-      //if (millis() - mark < delay) {
+        mark = millis();
+      }
+    }
+    void clustershot(){
+      if(millis() - mark > wait){
+      PVector aimup = new PVector(0, -5); // up
+        _SM.spawn(new Bullet(pos.x, pos.y, aimup, team));
+      PVector aimright = new PVector(1, -5); // up
+        _SM.spawn(new Bullet(pos.x, pos.y, aimright, team));
+      PVector aimleft = new PVector(-1, -5); // up
+        _SM.spawn(new Bullet(pos.x, pos.y, aimleft, team));
+        mark = millis();
+      }
+    }
+    void lazer() { //incomplete
+      if(millis() - mark > wait){
+      PVector aim = new PVector(0, -10); // up
+        _SM.spawn(new BigBullet(pos.x, pos.y, aim, team));
+        mark = millis();
+      }
     }
     
 }

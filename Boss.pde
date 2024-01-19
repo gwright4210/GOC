@@ -1,24 +1,14 @@
-class Boss extends Sprite {
-     // constructor
+class Boss extends Invader {
+
+    long mark, wait = 50; // ms
+    long bdelay = 3000;
     Boss(float x, float y) {
-        super(x, y, 100, 40);
-        vel = new PVector(5, 0); // moving right
-    }
-    
-    @Override // change directions left and right
-      void updatedirection() {
-        pos.add(vel);
-        
-        if (pos.x < 0 || pos.x > width) {
-            vel.x *= -1;
-        }
-    }
-    long mark, wait = 200; // ms
-    mark = millis();
+        super(x, y);
+        mark = millis();
     }
 
     @Override
-    void updateaim() {
+    void update() {
         super.update();
         PVector aim = new PVector(_SM.player.pos.x - this.pos.x, _SM.player.pos.y - this.pos.y);
         aim = aim.normalize().mult(8); // turn this into a single unit vector, then increase its magnitude
