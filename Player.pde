@@ -1,7 +1,9 @@
 class Player extends Sprite {
     boolean left, right, up, down, chargeShot = false;
-    long mark, wait = 3000;
-   
+    long mark, smallmark, wait = 3000;
+    long lazerdelay = 10000;
+    long shotdelay = 300;
+    int lives = 3;
    
     
     Player(float x, float y) {
@@ -10,6 +12,7 @@ class Player extends Sprite {
         super(x, y, 40, 40); // in this case, Sprite
         team = 1;
         mark = millis();
+        smallmark = millis();
     }
 
     @Override
@@ -42,7 +45,11 @@ class Player extends Sprite {
 
     @Override
     void handleCollision() {
-        // don't die.
+       lives -= 1;
+       if(lives < 0){
+         _SM.destroy(this);
+       }
+       
     }
 
     void keyUp() {
@@ -74,12 +81,19 @@ class Player extends Sprite {
             case 'B': bigshot(); break;
             case 'c':
             case 'C': clustershot(); break;
+            case 'l':
+            case 'L': lazer(); break;
+            case 'o':
+            case 'O': supersecretspawner(); break;
         }
     }
    
     void smallshot() {
+      if(millis() - smallmark > shotdelay){
       PVector aim = new PVector(0, -10); // up
         _SM.spawn(new Bullet(pos.x, pos.y, aim, team));
+        smallmark = millis();
+      }
       //long delay = 3000; // 3 seconds
       //if (millis() - mark < delay) {
     }
@@ -101,12 +115,14 @@ class Player extends Sprite {
         mark = millis();
       }
     }
-    void lazer() { //incomplete
-      if(millis() - mark > wait){
-      PVector aim = new PVector(0, -10); // up
-        _SM.spawn(new BigBullet(pos.x, pos.y, aim, team));
+    void lazer() { //i still want to make it so it will go through anything
+      if(millis() - mark > lazerdelay){
+      PVector aim = new PVector(0, -80); // up
+        _SM.spawn(new Lazer(pos.x, pos.y, aim, team));
         mark = millis();
       }
     }
-    
+    void supersecretspawner(){
+       _SM.spawn(new Invader(150, 150));
+    }
 }

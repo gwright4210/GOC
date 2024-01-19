@@ -1,7 +1,6 @@
 class Boss extends Invader {
 
     long mark, wait = 50; // ms
-    long bdelay = 3000;
     Boss(float x, float y) {
         super(x, y);
         mark = millis();

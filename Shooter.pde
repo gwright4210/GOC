@@ -1,7 +1,6 @@
 class Shooter extends Invader {
 
     long mark, wait = 1200; // ms
-    long bdelay = 3000;
     Shooter(float x, float y) {
         super(x, y);
         mark = millis();
