@@ -21,8 +21,10 @@ class Boss extends Invader {
     @Override
     void handleCollision(){
       collisions += 1;
+      enemies -= 1;
       if(collisions > collisionsAllowed){
         _SM.destroy(this);
+        levels();
       }
     }
 }

@@ -24,7 +24,7 @@ class DoubleBoss extends Invader {
         healthbar();
         if(millis() - mark > wait) {
             mark = millis();
-            //_SM.spawn(new Bullet(pos, aim, team));
+            _SM.spawn(new Bullet(pos, aim, team));
         }
     }
     
@@ -33,12 +33,14 @@ class DoubleBoss extends Invader {
     @Override
     void handleCollision(){
       lives -= 1;
+      enemies -= 1;
       if(lives < 0){
          xdeath = pos.x;
          ydeath = pos.y;
         _SM.destroy(this);
-        _SM.spawn(new Shooter(xdeath + 50, ydeath));
-        _SM.spawn(new Shooter(xdeath - 60, ydeath));
+        _SM.spawn(new MiniBoss(xdeath + 50, ydeath));
+        _SM.spawn(new MiniBoss(xdeath - 60, ydeath));
+       
       }
     }
 }

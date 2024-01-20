@@ -1,5 +1,6 @@
 class Player extends Sprite {
     //PImage playerArt;
+    int teamates, maxTeamates = 3;
     boolean left, right, up, down, chargeShot = false;
     long mark, smallmark, wait = 3000;
     long lazerdelay = 10000;
@@ -13,6 +14,15 @@ class Player extends Sprite {
         x += 40;
       }
     }
+    
+    void enemies(){
+      int x = 200;
+      for(int i = 0; i < enemies; i++){
+        rect(x, 8, 22, 22);
+        x += 40;
+      }
+    }
+   
     
     Player(float x, float y) {
         // super refers to the parent
@@ -49,6 +59,8 @@ class Player extends Sprite {
         fill(200, 0, 200);
         ellipse(pos.x, pos.y, size.x, size.y);
         healthbar();
+        enemies();
+       
     }
 
     @Override
@@ -90,7 +102,7 @@ class Player extends Sprite {
             case 'l':
             case 'L': lazer(); break;
             case 'o':
-            case 'O': supersecretspawner(); break;
+            case 'O':supersecretspawner(); break;
             case '0': setup(); break;
         }
     }
@@ -132,6 +144,7 @@ class Player extends Sprite {
         mark = millis();
       }
     }
+      
     
     void supersecretspawner(){
        _SM.spawn(new Shooter(150, 150));

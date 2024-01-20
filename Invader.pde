@@ -1,4 +1,5 @@
 class Invader extends Sprite {
+    float leveldelay = 3000;
     
     // constructor
     Invader(float x, float y) {
@@ -9,9 +10,17 @@ class Invader extends Sprite {
     @Override // change directions left and right
     void update() {
         pos.add(vel);
-        
         if (pos.x < 0 || pos.x > width) {
             vel.x *= -1;
+        }
+    }
+    
+    @Override
+     void handleCollision() {
+        _SM.destroy(this);
+        enemies -= 1; 
+        if(enemies < 1){
+          levels();
         }
     }
 }
