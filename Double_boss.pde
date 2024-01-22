@@ -1,10 +1,11 @@
 class DoubleBoss extends Invader {
     int lives = 2;
     float ydeath, xdeath;
-    long deathtime, mark, wait = 50; // ms
+    long deathtime, mark, wait = 100; // ms
     DoubleBoss(float x, float y) {
         super(x, y);
         mark = millis();
+        enemies += lives - 1;
     }    
     
     void healthbar(){
@@ -33,7 +34,7 @@ class DoubleBoss extends Invader {
     void handleCollision(){
       lives -= 1;
       enemies -= 1;
-      if(lives < 0){
+      if(lives <= 0){
          xdeath = pos.x;
          ydeath = pos.y;
         _SM.destroy(this);

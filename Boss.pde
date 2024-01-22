@@ -1,9 +1,10 @@
 class Boss extends Invader {
-    int collisions, collisionsAllowed = 2;
+    int lives = 3;
     long mark, wait = 50; // ms
     Boss(float x, float y) {
         super(x, y);
         mark = millis();
+        enemies += lives - 1;
     }
 
     @Override
@@ -20,9 +21,9 @@ class Boss extends Invader {
     }
     @Override
     void handleCollision(){
-      collisions += 1;
+      lives -= 1;
       enemies -= 1;
-      if(collisions > collisionsAllowed){
+      if(lives <= 0){
         _SM.destroy(this);
         levels();
       }

@@ -1,11 +1,14 @@
 class Player extends Sprite {
     //PImage playerArt;
     //int teamates, maxTeamates = 3;
-    boolean left, right, up, down;
-    long mark, smallmark, wait = 3000;
+    boolean left, right, up, down, charging = false;
+    long mark, smallmark, chargetime, wait = 3000;
     long lazerdelay = 10000;
     long shotdelay = 300;
+    long clusterdelay = 800;
+    long chargeTime;
     int lives = 3 - liveslost;
+    boolean basicShot = true;
    
     void healthbar(){
       int x = 10;
@@ -82,7 +85,9 @@ class Player extends Sprite {
             case 'd':
             case 'D': right = false; break;
             case 'w':
-            case 'W': up = false; break;          
+            case 'W': up = false; break;  
+            case 'c':
+            case 'C': releaseCharge();
         }
     }
     void keyDown() {
@@ -95,12 +100,12 @@ class Player extends Sprite {
             case 'D': right = true; break;
             case 'w':
             case 'W': up = true; break;
-            case ' ':
-            case 'f': smallshot(); break;
+            case ' ': if(basicShot == true){ smallshot(); break;} else{ clustershot(); break;}
+            case 'f': switchShot(); break;
             case 'b':
             case 'B': bigshot(); break;
             case 'c':
-            case 'C': clustershot(); break;
+            case 'C': chargeShot(); break;
             case 'l':
             case 'L': lazer(); break;
             case 'o':
@@ -128,7 +133,7 @@ class Player extends Sprite {
     }
     
     void clustershot(){
-      if(millis() - mark > wait){
+      if(millis() - mark > clusterdelay){
       PVector aimup = new PVector(0, -5); // up
         _SM.spawn(new Bullet(pos.x, pos.y, aimup, team));
       PVector aimright = new PVector(1, -5); // up
@@ -146,9 +151,28 @@ class Player extends Sprite {
         mark = millis();
       }
     }
-      
     
     void supersecretspawner(){
        _SM.spawn(new Shooter(150, 150));
+    }
+    
+    void switchShot(){
+      if(basicShot == true){
+        basicShot = false;
+      }
+      else{
+        basicShot = true;
+      }
+    }
+    
+    void chargeShot(){
+      charging = true;
+      chargetime = millis();
+    }
+    
+    void releaseCharge(){
+       PVector aim = new PVector(0, -10); // up
+        _SM.spawn(new ChargeShot(pos.x, pos.y, aim, team));
+      
     }
 }

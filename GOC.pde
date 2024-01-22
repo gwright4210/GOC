@@ -7,11 +7,12 @@ void setup() {
     
     /* Controls
     WASD
-    Regular shot: space bar or f
-    Shotgun/Cluster: c 3 second cooldown
-    Lazer: l 12 second cooldown
-    BIG BULLET: b 3 second cooldown
-    Spawner: o
+    Regular shot: space bar
+    Shotgun/Cluster: space bar
+    Use F to switch between regular and shotgun shots
+    Lazer: L 10 second cooldown
+    BIG BULLET: B 3 second cooldown
+    Spawne Invader: O
     level reset: 0
     */
     
@@ -40,17 +41,17 @@ void keyReleased() {
 }
 
 void levelOne(){
-   enemies = 5;
+   enemies = 0;
    
    _SM.spawn(new Shooter(100, 85));
    _SM.spawn(new Shooter(240, 85));
    _SM.spawn(new Shooter(380, 85));
    _SM.spawn(new Invader(170, 150));
-   
    _SM.spawn(new Invader(310, 150));
 }
 void levelTwo(){
-   enemies = 5;
+   //enemies = 5;
+   enemies = 0;
    _SM.spawn(new Shooter(100, 85));
    _SM.spawn(new Shooter(240, 85));
    _SM.spawn(new Shooter(380, 85));
@@ -58,37 +59,54 @@ void levelTwo(){
    _SM.spawn(new Shooter(310, 150));
 }
 void levelThree(){
-   enemies = 1;
-   
+   //enemies = 1;
+   enemies = 0;
    _SM.spawn(new MiniBoss(310, 150));
    
 }
 
 void levelFour(){
-   enemies = 5;
-   
+   //enemies = 5; //enemy has 5 lives, thus counts as 5 enemies
+   enemies = 0;
    _SM.spawn(new DoubleBoss(310, 150));
    
 }
 
 void levelFive(){
-   enemies = 2;
-   
+  // enemies = 2; // has 2 lives
+   enemies = 0;
    _SM.spawn(new Boss(310, 150));
    
 }
 
 void levelSix(){
-   enemies = 1;
-   
+   //enemies = 1;
+   enemies = 0;
    _SM.spawn(new FinalBoss(310, 150));
+   
+}
+
+void endscreen(){
+   //enemies = 1;
+   enemies = 0;
+   
+   
+  
    
 }
    
 
 void displayLevel(){
-  textSize(25);
-  text(leveldisplay, 925, 25);
+  leveldisplay = "Level " + level;
+  if(level > 6){
+    leveldisplay = "You Won!";
+    textSize(80);
+    text(leveldisplay, 360, 150);
+  }
+  else{
+    textSize(25);
+    text(leveldisplay, 925, 25);
+  }
 }
 
 void levels(){
@@ -97,40 +115,32 @@ void levels(){
   level += 1;
   while(1 == 1){// && millis() - timerstart > timer){
     if(level == 1){
-      displayLevel();
       levelOne();
       break;
     }
     if(level == 2){// && millis() - timerstart > timer){
-        displayLevel();
-        level += 1;
         levelTwo();
         break;
     }
     if(level == 3){// && millis() - timerstart > timer){
-        displayLevel();
-        level += 1;
-         _SM = new SpriteManager();
         levelThree();
         break;
     }
     if(level == 4){// && millis() - timerstart > timer){
-        displayLevel();
-        level += 1;
         levelFour();
         break;
     }
     if(level == 5){// && millis() - timerstart > timer){
-        displayLevel();
-        level += 1;
         levelFive();
         break;
     }
     if(level == 6){// && millis() - timerstart > timer){
-        displayLevel();
-        level += 1;
         levelSix();
         break;
+    }
+    if(level > 6){
+      endscreen();
+      break;
     }
   }
 }
