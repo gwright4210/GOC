@@ -1,5 +1,4 @@
 class Invader extends Sprite {
-    float leveldelay = 3000;
     
     // constructor
     Invader(float x, float y) {

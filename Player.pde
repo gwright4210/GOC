@@ -1,11 +1,11 @@
 class Player extends Sprite {
     //PImage playerArt;
-    int teamates, maxTeamates = 3;
-    boolean left, right, up, down, chargeShot = false;
+    //int teamates, maxTeamates = 3;
+    boolean left, right, up, down;
     long mark, smallmark, wait = 3000;
     long lazerdelay = 10000;
     long shotdelay = 300;
-    int lives = 3;
+    int lives = 3 - liveslost;
    
     void healthbar(){
       int x = 10;
@@ -60,13 +60,15 @@ class Player extends Sprite {
         ellipse(pos.x, pos.y, size.x, size.y);
         healthbar();
         enemies();
+        
        
     }
 
     @Override
     void handleCollision() {
+       liveslost += 1;
        lives -= 1;
-       if(lives < 0){
+       if(lives <= 0){
          _SM.destroy(this);
        }     
     }
@@ -102,8 +104,8 @@ class Player extends Sprite {
             case 'l':
             case 'L': lazer(); break;
             case 'o':
-            case 'O':supersecretspawner(); break;
-            case '0': setup(); break;
+            case 'O': supersecretspawner(); break;
+            case '0': liveslost = 0; level -= 1; levels(); break;
         }
     }
    

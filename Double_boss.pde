@@ -1,5 +1,4 @@
 class DoubleBoss extends Invader {
-    boolean isdead = false;
     int lives = 2;
     float ydeath, xdeath;
     long deathtime, mark, wait = 50; // ms
@@ -38,8 +37,8 @@ class DoubleBoss extends Invader {
          xdeath = pos.x;
          ydeath = pos.y;
         _SM.destroy(this);
-        _SM.spawn(new MiniBoss(xdeath + 50, ydeath));
-        _SM.spawn(new MiniBoss(xdeath - 60, ydeath));
+        _SM.spawn(new MiniBoss(xdeath + 100, ydeath));
+        _SM.spawn(new MiniBoss(xdeath - 100, ydeath));
        
       }
     }

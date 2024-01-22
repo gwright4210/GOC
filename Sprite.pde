@@ -15,6 +15,7 @@ class Sprite {
     void display() {
         fill(255);
         ellipse(pos.x, pos.y, size.x, size.y);
+        displayLevel();
         
     }
     
