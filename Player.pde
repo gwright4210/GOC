@@ -1,5 +1,5 @@
 class Player extends Sprite {
-    //PImage playerArt;
+    PImage img;
     //int teamates, maxTeamates = 3;
     boolean left, right, up, down, charging = false;
     long mark, smallmark, chargetime, wait = 3000;
@@ -59,8 +59,10 @@ class Player extends Sprite {
  
     @Override
     void display() {
+        img = loadImage("data/Dude_Monster.png");
         fill(200, 0, 200);
-        ellipse(pos.x, pos.y, size.x, size.y);
+        image(img,pos.x - 20, pos.y - 30, size.x + 30, size.y + 30);
+        //ellipse(pos.x - 20, pos.y - 30, size.x + 20, size.y - 20);
         healthbar();
         enemies();
         

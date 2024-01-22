@@ -1,6 +1,6 @@
 class BigBullet extends Sprite {
     int collisions, collisionsAllowed = 3;
-    
+    PImage img;
     
     BigBullet(float x, float y, PVector velocity, int team) {
         super(x, y, 120, 40); // invoke parent constructor
@@ -27,4 +27,11 @@ class BigBullet extends Sprite {
     void update() {
         pos.add(vel);
     }
+    
+    @Override
+     void display() {
+        img = loadImage("data/Bullet.png");
+        fill(200, 0, 200);
+        image(img, pos.x, pos.y, size.x, size.y);
+     }
 }

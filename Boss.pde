@@ -1,6 +1,6 @@
 class Boss extends Invader {
     int lives = 3;
-    long mark, wait = 50; // ms
+    long mark, wait = 30; // ms
     Boss(float x, float y) {
         super(x, y);
         mark = millis();
