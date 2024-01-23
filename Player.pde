@@ -18,13 +18,7 @@ class Player extends Sprite {
       }
     }
     
-    void enemies(){
-      int x = 200;
-      for(int i = 0; i < enemies; i++){
-        rect(x, 8, 22, 22);
-        x += 40;
-      }
-    }
+    
    
     
     Player(float x, float y) {
@@ -54,17 +48,16 @@ class Player extends Sprite {
 
         // always try to decelerate
         vel.mult(0.9);
-        //image(playerArt, 0, height/2, playerArt.width/2, playerArt.height/2);
     }
  
     @Override
     void display() {
-        img = loadImage("data/Dude_Monster.png");
+        img = loadImage("data/GOC_Player.png");
         fill(200, 0, 200);
-        image(img,pos.x - 20, pos.y - 30, size.x + 30, size.y + 30);
+        image(img,pos.x - 30, pos.y, size.x + 30, size.y + 30);
         //ellipse(pos.x - 20, pos.y - 30, size.x + 20, size.y - 20);
         healthbar();
-        enemies();
+        displayLevel();
         
        
     }
@@ -146,8 +139,8 @@ class Player extends Sprite {
       }
     }
     
-    void lazer() { //i still want to make it so it will go through anything
-      if(millis() - mark > lazerdelay){
+    void lazer() { 
+      if(millis() - mark > 0){
       PVector aim = new PVector(0, -80); // up
         _SM.spawn(new Lazer(pos.x, pos.y, aim, team));
         mark = millis();

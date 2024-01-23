@@ -1,6 +1,6 @@
 class FinalBoss extends Invader {
 
-    long mark, wait = 50; // ms
+    long mark, wait = 300; // ms
     FinalBoss(float x, float y) {
         super(x, y);
         mark = millis();

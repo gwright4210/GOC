@@ -1,6 +1,6 @@
-class ChargeShot extends Sprite {
+class ChargeShot extends Sprite{
     int collisions, collisionsAllowed = 3;
-    float multiplier = 10;
+    float chargeTime, charge = 10;
     
     ChargeShot(float x, float y, PVector velocity, int team) {
         super(x, y, 10, 10); // invoke parent constructor
@@ -13,6 +13,12 @@ class ChargeShot extends Sprite {
         this(pos.x, pos.y, vel, team); // invoke another own constructor
         // this refers to the above on line 3
     }
+    
+    float getCharge(){
+      charge = millis() - chargeTime;
+      return charge;
+    }
+      
     
     @Override
     void handleCollision(){

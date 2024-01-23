@@ -1,11 +1,13 @@
 class DoubleBoss extends Invader {
     int lives = 2;
     float ydeath, xdeath;
-    long deathtime, mark, wait = 100; // ms
+    long deathtime, mark, wait = 300; // ms
+    long spawnTimer, spawnDelay = 5000;
     DoubleBoss(float x, float y) {
         super(x, y);
         mark = millis();
         enemies += lives - 1;
+        spawnTimer = millis();
     }    
     
     void healthbar(){
@@ -26,9 +28,11 @@ class DoubleBoss extends Invader {
             mark = millis();
             _SM.spawn(new Bullet(pos, aim, team));
         }
+        if(millis() - spawnTimer > spawnDelay) {
+            spawnTimer = millis();
+            _SM.spawn(new Invader(pos.x, pos.y + 100));
+        }
     }
-    
-    
     
     @Override
     void handleCollision(){
