@@ -1,11 +1,15 @@
 class ChargeShot extends Sprite{
     int collisions, collisionsAllowed = 3;
-    float chargeTime, charge = 10;
+    float charge, Basecharge = 10;
+    float chargeTime = 0;
     
     ChargeShot(float x, float y, PVector velocity, int team) {
         super(x, y, 10, 10); // invoke parent constructor
+        size.x = getCharge();
+        size.y = getCharge();
         vel = velocity;
         this.team = team;
+        disposeCharge();
     }
 
     ChargeShot(PVector pos, PVector vel, int team) {
@@ -15,8 +19,14 @@ class ChargeShot extends Sprite{
     }
     
     float getCharge(){
-      charge = millis() - chargeTime;
+      charge = ((millis() - chargeTime) / 1000) + Basecharge;
+      chargeTime = 0;
       return charge;
+    }
+    
+    void disposeCharge(){
+      charge = 0;
+      chargeTime = 0;
     }
       
     

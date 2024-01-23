@@ -2,6 +2,7 @@ SpriteManager _SM;
 int liveslost, level, enemies;
 long timerstart, timer = 3000;
 String leveldisplay = "Level " + level;
+Boolean isDead;
 
 void setup() {
     
@@ -87,16 +88,11 @@ void levelSix(){
 void endscreen(){
    //enemies = 1;
    enemies = 0;
-  
-   
-   
-  
-   
 }
-   
 
 void displayLevel(){
   leveldisplay = "Level " + level;
+  
   if(level > 6){
     leveldisplay = "You Won!";
     textSize(80);

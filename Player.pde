@@ -3,7 +3,7 @@ class Player extends Sprite {
     //int teamates, maxTeamates = 3;
     boolean left, right, up, down, charging = false;
     long mark, smallmark, chargetime, wait = 3000;
-    long lazerdelay = 10000;
+    long lazerdelay = 8000;
     long shotdelay = 300;
     long clusterdelay = 800;
     long chargeTime;
@@ -49,6 +49,8 @@ class Player extends Sprite {
         // always try to decelerate
         vel.mult(0.9);
     }
+    
+    
  
     @Override
     void display() {
@@ -68,7 +70,8 @@ class Player extends Sprite {
        lives -= 1;
        if(lives <= 0){
          _SM.destroy(this);
-       }     
+         isDead = true;
+       }
     }
 
     void keyUp() {
@@ -140,7 +143,7 @@ class Player extends Sprite {
     }
     
     void lazer() { 
-      if(millis() - mark > 0){
+      if(millis() - mark > lazerdelay){
       PVector aim = new PVector(0, -80); // up
         _SM.spawn(new Lazer(pos.x, pos.y, aim, team));
         mark = millis();
@@ -162,12 +165,13 @@ class Player extends Sprite {
     
     void chargeShot(){
       charging = true;
-      chargetime = millis();
+      //chargetime = millis();
     }
     
     void releaseCharge(){
        PVector aim = new PVector(0, -10); // up
         _SM.spawn(new ChargeShot(pos.x, pos.y, aim, team));
-      
+       chargeTime = 0;
+       charging = false;
     }
 }
