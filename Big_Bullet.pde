@@ -1,7 +1,7 @@
 class BigBullet extends Sprite {
     int collisions, collisionsAllowed = 3;
     PImage img;
-    long bulletTimer, bulletExpire = 1700;
+    long bulletTimer, bulletExpire = 2000;
     BigBullet(float x, float y, PVector velocity, int team) {
         super(x, y, 120, 40); // invoke parent constructor
         vel = velocity;
@@ -36,6 +36,7 @@ class BigBullet extends Sprite {
      void display() {
         img = loadImage("data/Bullet.png");
         fill(200, 0, 200);
-        image(img, pos.x, pos.y, size.x, size.y);
+        //ellipse(pos.x, pos.y, size.x, size.y);
+        image(img, pos.x - 58, pos.y - 18, size.x, size.y);
      }
 }

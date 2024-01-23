@@ -10,7 +10,7 @@ class Shooter extends Invader {
     void update() {
         super.update();
         PVector aim = new PVector(_SM.player.pos.x - this.pos.x, _SM.player.pos.y - this.pos.y);
-        aim = aim.normalize().mult(8); // turn this into a single unit vector, then increase its magnitude
+        aim = aim.normalize().mult(11); // turn this into a single unit vector, then increase its magnitude
 
         if(millis() - mark > wait) {
             mark = millis();

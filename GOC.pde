@@ -44,19 +44,17 @@ void levelOne(){
    enemies = 0;
    
    _SM.spawn(new Shooter(100, 85));
-   _SM.spawn(new Shooter(240, 85));
    _SM.spawn(new Shooter(380, 85));
-   _SM.spawn(new Invader(170, 150));
-   _SM.spawn(new Invader(310, 150));
+   _SM.spawn(new Invader(240, 150));
+  
 }
 void levelTwo(){
    //enemies = 5;
    enemies = 0;
-   _SM.spawn(new Shooter(100, 85));
-   _SM.spawn(new Shooter(240, 85));
-   _SM.spawn(new Shooter(380, 85));
-   _SM.spawn(new Shooter(170, 150));
-   _SM.spawn(new Shooter(310, 150));
+   _SM.spawn(new Shooter(100, 70));
+   _SM.spawn(new Shooter(300, 250));
+   _SM.spawn(new Shooter(500, 160));
+   
 }
 void levelThree(){
    //enemies = 1;

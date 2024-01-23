@@ -1,6 +1,6 @@
 class Bullet extends Sprite {
     PImage img;  
-    long bulletTimer, bulletExpire = 1700;
+    long bulletTimer, bulletExpire = 3200;
   
     Bullet(float x, float y, PVector velocity, int team) {
         super(x, y, 10, 10); // invoke parent constructor
@@ -20,7 +20,8 @@ class Bullet extends Sprite {
      void display() {
         img = loadImage("data/Bullet.png");
         fill(200, 0, 200);
-        image(img, pos.x, pos.y, size.x, size.y);
+        //ellipse(pos.x, pos.y, size.x, size.y);
+        image(img, pos.x - 5, pos.y - 3, size.x, size.y);
      }
     
     

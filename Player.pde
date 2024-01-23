@@ -55,7 +55,7 @@ class Player extends Sprite {
         img = loadImage("data/GOC_Player.png");
         fill(200, 0, 200);
         image(img,pos.x - 30, pos.y, size.x + 30, size.y + 30);
-        //ellipse(pos.x - 20, pos.y - 30, size.x + 20, size.y - 20);
+        //ellipse(pos.x, pos.y, size.x, size.y);
         healthbar();
         displayLevel();
         
