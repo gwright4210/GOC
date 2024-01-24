@@ -1,8 +1,10 @@
 SpriteManager _SM;
-int liveslost, level, enemies;
+int liveslost, level, enemies, lives = 3;
 long timerstart, timer = 3000;
 String leveldisplay = "Level " + level;
-Boolean isDead;
+Boolean gameOver = false;
+
+Boolean gameStart = false;
 
 void setup() {
     
@@ -18,7 +20,7 @@ void setup() {
     */
     
    size(1024, 768);
-   levels();
+   tutorialScreen();
     //_SM.spawn(new Invader(250, 50));
     //_SM.spawn(new DoubleBoss(150, 150));
     //_SM.spawn(new Shooter(150, 100));
@@ -31,6 +33,46 @@ void setup() {
 void draw() {
     background(0);
     _SM.manage();
+    // your existing draw code here
+    if(gameOver == true){
+      showGameOverScreen();
+    }
+    if(gameStart == false){
+      showControls();
+    }
+}
+
+void showControls(){
+  fill(255); // set the text color to white
+  textSize(25); // set the text size
+  text("Controls - WASD", 20, 580); 
+  text("Shoot - Spacebar", 20, 620);
+  text("Switch between fire types - F", 20, 660);
+  text("BIG SHOT - B", 20, 700);
+  text("Lazer - L", 20, 740);
+  text("Press T to reset game", 400, 360);
+}
+
+void tutorialScreen(){
+  _SM = new SpriteManager();
+}
+
+void gameReset(){
+  lives = 3;
+  liveslost = 0;
+  level = 0;
+  gameOver = false;
+  levels();
+}
+
+void showGameOverScreen() {
+  
+  fill(255); // set the text color to white
+  textSize(32); // set the text size
+  textAlign(CENTER, CENTER); // align the text to the center
+  text("Game Over", width / 2, height / 2); // display the text in the center of the screen
+  textSize(25); // set the text size // align the text to the center
+  text("Press T to reset game", width / 2, (height / 2) + 80); // display the text in the center of the screen
 }
 
 void keyPressed() {
@@ -102,6 +144,12 @@ void displayLevel(){
     textSize(25);
     text(leveldisplay, 925, 25);
   }
+}
+
+void playerReset(){
+  level = 0;
+  levels();
+  
 }
 
 void levels(){

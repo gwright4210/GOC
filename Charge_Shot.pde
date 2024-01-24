@@ -19,7 +19,7 @@ class ChargeShot extends Sprite{
     }
     
     float getCharge(){
-      charge = ((millis() - chargeTime) / 1000) + Basecharge;
+      charge = ((millis() - chargeTime) / 200) + 0;
       chargeTime = 0;
       return charge;
     }

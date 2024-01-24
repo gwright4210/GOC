@@ -69,8 +69,8 @@ class Player extends Sprite {
        liveslost += 1;
        lives -= 1;
        if(lives <= 0){
-         _SM.destroy(this);
-         isDead = true;
+         _SM = new SpriteManager();
+         gameOver = true;
        }
     }
 
@@ -103,12 +103,14 @@ class Player extends Sprite {
             case 'b':
             case 'B': bigshot(); break;
             case 'c':
-            case 'C': chargeShot(); break;
+            case 'C': //chargeShot(); break;
             case 'l':
             case 'L': lazer(); break;
             case 'o':
             case 'O': supersecretspawner(); break;
             case '0': liveslost = 0; level -= 1; levels(); break;
+            case 'T': 
+            case 't': if(gameOver == true) gameReset(); break;
         }
     }
    
@@ -143,7 +145,7 @@ class Player extends Sprite {
     }
     
     void lazer() { 
-      if(millis() - mark > lazerdelay){
+      if(millis() - mark > 0){
       PVector aim = new PVector(0, -80); // up
         _SM.spawn(new Lazer(pos.x, pos.y, aim, team));
         mark = millis();
@@ -165,13 +167,15 @@ class Player extends Sprite {
     
     void chargeShot(){
       charging = true;
-      //chargetime = millis();
+      chargetime = millis();
     }
     
     void releaseCharge(){
-       PVector aim = new PVector(0, -10); // up
-        _SM.spawn(new ChargeShot(pos.x, pos.y, aim, team));
-       chargeTime = 0;
-       charging = false;
+      if(charging == true){
+         PVector aim = new PVector(0, -10); // up
+          _SM.spawn(new ChargeShot(pos.x, pos.y, aim, team)); 
+         charging = false;
+         chargetime = 0;
+      }
     }
 }

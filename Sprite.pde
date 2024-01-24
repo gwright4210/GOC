@@ -9,7 +9,9 @@ class Sprite {
     }
     
     void update() {
-        
+      if (gameOver == true) {
+        showGameOverScreen();
+      }
     }
     
     void enemies(){
