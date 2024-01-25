@@ -3,7 +3,7 @@ class BigBullet extends Sprite {
     PImage img;
     long bulletTimer, bulletExpire = 2000;
     BigBullet(float x, float y, PVector velocity, int team) {
-        super(x, y, 120, 40); // invoke parent constructor
+        super(x, y, 120, 40, 1); // invoke parent constructor
         vel = velocity;
         this.team = team;
         bulletTimer = millis();

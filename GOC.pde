@@ -1,5 +1,5 @@
 SpriteManager _SM;
-int liveslost, level, enemies, lives = 3;
+int turrets, liveslost, level, enemies, lives = 3;
 long timerstart, timer = 3000;
 String leveldisplay = "Level " + level;
 Boolean gameOver = false;
@@ -21,11 +21,6 @@ void setup() {
     
    size(1024, 768);
    tutorialScreen();
-    //_SM.spawn(new Invader(250, 50));
-    //_SM.spawn(new DoubleBoss(150, 150));
-    //_SM.spawn(new Shooter(150, 100));
-    //_SM.spawn(new Shooter(250, 50));
-    
     
    
 }
@@ -33,7 +28,7 @@ void setup() {
 void draw() {
     background(0);
     _SM.manage();
-    // your existing draw code here
+    
     if(gameOver == true){
       showGameOverScreen();
     }
@@ -72,7 +67,7 @@ void showGameOverScreen() {
   textAlign(CENTER, CENTER); // align the text to the center
   text("Game Over", width / 2, height / 2); // display the text in the center of the screen
   textSize(25); // set the text size // align the text to the center
-  text("Press T to reset game", width / 2, (height / 2) + 80); // display the text in the center of the screen
+  text("Press T to reset game", width / 2, (height / 2) + 80); // display the text in the center of the screen and a little down
 }
 
 void keyPressed() {
@@ -153,6 +148,7 @@ void playerReset(){
 }
 
 void levels(){
+  turrets = 0;
    _SM = new SpriteManager();
   timerstart = millis();
   level += 1;

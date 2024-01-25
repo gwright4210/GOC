@@ -13,7 +13,8 @@ class DoubleBoss extends Invader {
     void healthbar(){
       int x = 200;
       for(int i = 0; i < lives; i++){
-        rect(x, 8, 22, 22);
+        fill(0, 0, 255);
+        rect(x, 8, 45, 22);
         x += 40;
       }
     }

@@ -2,7 +2,7 @@ class Invader extends Sprite {
     PImage img;  
     // constructor
     Invader(float x, float y) {
-        super(x, y, 100, 40);
+        super(x, y, 100, 40, 2);
         vel = new PVector(5, 0); // moving right
         enemies += 1;
     }
@@ -18,10 +18,8 @@ class Invader extends Sprite {
     @Override
      void display() {
         img = loadImage("data/GOC_Enemy.png");
-        
-        fill(200, 0, 200);
         image(img, pos.x - 45, pos.y - 15, size.x - 5, size.y - 5);
-         enemies();
+        enemies();
      }
     
     @Override

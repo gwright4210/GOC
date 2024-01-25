@@ -2,7 +2,7 @@ class Lazer extends Sprite {
     PImage img;
     long lazerTimer, lazerExpire = 2000;
     Lazer(float x, float y, PVector velocity, int team) {
-        super(x, y, 100, 600); // invoke parent constructor
+        super(x, y, 100, 600, 1); // invoke parent constructor
         vel = velocity;
         this.team = team;
          lazerTimer = millis();

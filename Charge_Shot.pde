@@ -4,7 +4,7 @@ class ChargeShot extends Sprite{
     float chargeTime = 0;
     
     ChargeShot(float x, float y, PVector velocity, int team) {
-        super(x, y, 10, 10); // invoke parent constructor
+        super(x, y, 10, 10, 1); // invoke parent constructor
         size.x = getCharge();
         size.y = getCharge();
         vel = velocity;

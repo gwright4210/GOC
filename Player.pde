@@ -1,6 +1,7 @@
 class Player extends Sprite {
     PImage img;
     PImage damage;
+    PImage PlayerHeart;
     //int teamates, maxTeamates = 3;
     boolean left, right, up, down, charging = false;
     long mark, smallmark, chargetime, wait = 3000;
@@ -8,14 +9,18 @@ class Player extends Sprite {
     long shotdelay = 300;
     long clusterdelay = 800;
     long chargeTime;
+    long damageMark, damageTime = 600;
     int lives = 3 - liveslost;
-    boolean basicShot = true;
+    int turretMax = 1;
+    boolean inDamage, basicShot = true;
    
     void healthbar(){
       int x = 10;
+      PlayerHeart = loadImage("data/Player_Heart.gif");
       for(int i = 0; i < lives; i++){
-        rect(x, 8, 22, 22);
-        x += 40;
+        image(PlayerHeart,x, 8, 45, 45);
+        //rect(x, 8, 22, 22);
+        x += 45;
       }
     }
     
@@ -25,10 +30,10 @@ class Player extends Sprite {
     Player(float x, float y) {
         // super refers to the parent
         // ... I use it here as a constructor
-        super(x, y, 40, 40); // in this case, Sprite
-        team = 1;
+        super(x, y, 40, 40 , 1); // in this case, Sprite
         mark = millis();
         smallmark = millis();
+        inDamage = false;
         //playerArt = loadImage("GOCSpriteSheet/Dude_Monster");   
     }
 
@@ -51,6 +56,14 @@ class Player extends Sprite {
         vel.mult(0.9);
     }
     
+    void damage(){
+      if(millis() - damageMark > damageTime){
+        inDamage = false;
+      }
+    }
+      
+      
+    
     
  
     @Override
@@ -58,7 +71,13 @@ class Player extends Sprite {
         img = loadImage("data/GOC_Player.png");
         damage = loadImage("data/GOC_Player_Damage.png");
         fill(200, 0, 200);
-        image(img,pos.x - 35, pos.y - 35, size.x + 30, size.y + 30);
+        if(inDamage == false){
+          image(img,pos.x - 35, pos.y - 35, size.x + 30, size.y + 30);
+        }
+        else{
+          damage();
+          image(damage ,pos.x - 30, pos.y - 35, size.x + 30, size.y + 30);
+        }
         //ellipse(pos.x, pos.y, size.x, size.y);
         healthbar();
         displayLevel();
@@ -70,7 +89,8 @@ class Player extends Sprite {
     void handleCollision() {
        liveslost += 1;
        lives -= 1;
-       image(damage ,pos.x - 30, pos.y, size.x + 30, size.y + 30);
+       inDamage = true;
+       damageMark = millis();
        if(lives <= 0){
          _SM = new SpriteManager();
          gameOver = true;
@@ -115,7 +135,9 @@ class Player extends Sprite {
             case 'T': 
             case 't': if(gameOver == true) gameReset(); break;
             case 'h':
-            case 'H': if(gameStart == false) gameStart = true; levels(); break;
+            case 'H': if(gameStart == false) levels(); gameStart = true;  break;
+            case 'j':
+            case 'J': spawnTurret(); break;
         }
     }
    
@@ -189,5 +211,12 @@ class Player extends Sprite {
       level -= 1;
       gameOver = false;
       levels();
+    }
+    
+    void spawnTurret(){
+      if(turrets < turretMax){ 
+        
+         _SM.spawn(new Turret(pos.x, pos.y)); 
+      }
     }
 }

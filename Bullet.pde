@@ -3,7 +3,7 @@ class Bullet extends Sprite {
     long bulletTimer, bulletExpire = 3200;
   
     Bullet(float x, float y, PVector velocity, int team) {
-        super(x, y, 10, 10); // invoke parent constructor
+        super(x, y, 10, 10, 1); // invoke parent constructor
         vel = velocity;
         this.team = team;
         bulletTimer = millis();
