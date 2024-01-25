@@ -50,7 +50,7 @@ void showControls(){
   text("Switch between fire types - F", 20, 660);
   text("BIG SHOT - B", 20, 700);
   text("Lazer - L", 20, 740);
-  text("Press T to reset game", 400, 360);
+  text("Press H to start game", 400, 360);
 }
 
 void tutorialScreen(){

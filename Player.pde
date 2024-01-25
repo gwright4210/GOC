@@ -1,5 +1,6 @@
 class Player extends Sprite {
     PImage img;
+    PImage damage;
     //int teamates, maxTeamates = 3;
     boolean left, right, up, down, charging = false;
     long mark, smallmark, chargetime, wait = 3000;
@@ -55,8 +56,9 @@ class Player extends Sprite {
     @Override
     void display() {
         img = loadImage("data/GOC_Player.png");
+        damage = loadImage("data/GOC_Player_Damage.png");
         fill(200, 0, 200);
-        image(img,pos.x - 30, pos.y, size.x + 30, size.y + 30);
+        image(img,pos.x - 35, pos.y - 35, size.x + 30, size.y + 30);
         //ellipse(pos.x, pos.y, size.x, size.y);
         healthbar();
         displayLevel();
@@ -68,6 +70,7 @@ class Player extends Sprite {
     void handleCollision() {
        liveslost += 1;
        lives -= 1;
+       image(damage ,pos.x - 30, pos.y, size.x + 30, size.y + 30);
        if(lives <= 0){
          _SM = new SpriteManager();
          gameOver = true;
@@ -108,9 +111,11 @@ class Player extends Sprite {
             case 'L': lazer(); break;
             case 'o':
             case 'O': supersecretspawner(); break;
-            case '0': liveslost = 0; level -= 1; levels(); break;
+            case '0': levelReset(); break;
             case 'T': 
             case 't': if(gameOver == true) gameReset(); break;
+            case 'h':
+            case 'H': if(gameStart == false) gameStart = true; levels(); break;
         }
     }
    
@@ -145,7 +150,7 @@ class Player extends Sprite {
     }
     
     void lazer() { 
-      if(millis() - mark > 0){
+      if(millis() - mark > lazerdelay){
       PVector aim = new PVector(0, -80); // up
         _SM.spawn(new Lazer(pos.x, pos.y, aim, team));
         mark = millis();
@@ -177,5 +182,12 @@ class Player extends Sprite {
          charging = false;
          chargetime = 0;
       }
+    }
+    
+    void levelReset(){
+      liveslost = 0;
+      level -= 1;
+      gameOver = false;
+      levels();
     }
 }
