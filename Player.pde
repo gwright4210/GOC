@@ -3,16 +3,14 @@ class Player extends Sprite {
     PImage damage;
     PImage PlayerHeart;
     //int teamates, maxTeamates = 3;
-    boolean left, right, up, down, charging = false;
-    long mark, smallmark, chargetime, wait = 3000;
+    boolean left, right, up, down, inDamage, basicShot = true ;
+    long mark, smallmark, wait = 3000;
     long lazerdelay = 8000;
     long shotdelay = 300;
     long clusterdelay = 800;
-    long chargeTime;
     long damageMark, damageTime = 600;
     int lives = 3 - liveslost;
     int turretMax = 1;
-    boolean inDamage, basicShot = true;
    
     void healthbar(){
       int x = 10;
@@ -34,7 +32,6 @@ class Player extends Sprite {
         mark = millis();
         smallmark = millis();
         inDamage = false;
-        //playerArt = loadImage("GOCSpriteSheet/Dude_Monster");   
     }
 
     @Override
@@ -62,10 +59,6 @@ class Player extends Sprite {
       }
     }
       
-      
-    
-    
- 
     @Override
     void display() {
         img = loadImage("data/GOC_Player.png");
@@ -78,7 +71,7 @@ class Player extends Sprite {
           damage();
           image(damage ,pos.x - 30, pos.y - 35, size.x + 30, size.y + 30);
         }
-        //ellipse(pos.x, pos.y, size.x, size.y);
+        //ellipse(pos.x, pos.y, size.x, size.y); //turn on to see hitbox
         healthbar();
         displayLevel();
         
@@ -107,10 +100,9 @@ class Player extends Sprite {
             case 'D': right = false; break;
             case 'w':
             case 'W': up = false; break;  
-            case 'c':
-            case 'C': releaseCharge();
         }
     }
+    
     void keyDown() {
         switch(key) { // key is a global value
             case 'a':
@@ -123,14 +115,10 @@ class Player extends Sprite {
             case 'W': up = true; break;
             case ' ': if(basicShot == true){ smallshot(); break;} else{ clustershot(); break;}
             case 'f': switchShot(); break;
-            case 'b':
-            case 'B': bigshot(); break;
-            case 'c':
-            case 'C': //chargeShot(); break;
+            case 'i':
+            case 'I': bigshot(); break;
             case 'l':
             case 'L': lazer(); break;
-            case 'o':
-            case 'O': supersecretspawner(); break;
             case '0': levelReset(); break;
             case 'T': 
             case 't': if(gameOver == true) gameReset(); break;
@@ -147,8 +135,6 @@ class Player extends Sprite {
         _SM.spawn(new Bullet(pos.x, pos.y, aim, team));
         smallmark = millis();
       }
-      //long delay = 3000; // 3 seconds
-      //if (millis() - mark < delay) {
     }
     
     void bigshot() {
@@ -179,9 +165,6 @@ class Player extends Sprite {
       }
     }
     
-    void supersecretspawner(){
-       _SM.spawn(new Shooter(150, 150));
-    }
     
     void switchShot(){
       if(basicShot == true){
@@ -189,20 +172,6 @@ class Player extends Sprite {
       }
       else{
         basicShot = true;
-      }
-    }
-    
-    void chargeShot(){
-      charging = true;
-      chargetime = millis();
-    }
-    
-    void releaseCharge(){
-      if(charging == true){
-         PVector aim = new PVector(0, -10); // up
-          _SM.spawn(new ChargeShot(pos.x, pos.y, aim, team)); 
-         charging = false;
-         chargetime = 0;
       }
     }
     
@@ -215,7 +184,6 @@ class Player extends Sprite {
     
     void spawnTurret(){
       if(turrets < turretMax){ 
-        
          _SM.spawn(new Turret(pos.x, pos.y)); 
       }
     }
