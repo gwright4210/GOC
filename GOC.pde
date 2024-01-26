@@ -130,11 +130,15 @@ void endscreen(){
 
 void displayLevel(){
   leveldisplay = "Level " + level;
-  
-  if(level > 6){
+  if(level > 6 && liveslost == 0){
+    leveldisplay = "Perfect Game!";
+    textSize(80);
+    text(leveldisplay, 300, 150);
+  }
+  if(level > 6 && liveslost >= 1){
     leveldisplay = "You Won!";
     textSize(80);
-    text(leveldisplay, 360, 150);
+    text(leveldisplay, 340, 150);
   }
   else{
     textSize(25);
