@@ -20,7 +20,7 @@ class Bullet extends Sprite {
      void display() {
         img = loadImage("data/Bullet.png");
         fill(200, 0, 200);
-        //ellipse(pos.x, pos.y, size.x, size.y);
+        //ellipse(pos.x, pos.y, size.x, size.y); //hitbox
         image(img, pos.x - 5, pos.y - 3, size.x, size.y);
      }
     

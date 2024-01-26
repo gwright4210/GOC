@@ -2,7 +2,6 @@ class Player extends Sprite {
     PImage img;
     PImage damage;
     PImage PlayerHeart;
-    //int teamates, maxTeamates = 3;
     boolean left, right, up, down, inDamage, basicShot = true ;
     long mark, smallmark, wait = 3000;
     long lazerdelay = 8000;
@@ -17,7 +16,6 @@ class Player extends Sprite {
       PlayerHeart = loadImage("data/Player_Heart.gif");
       for(int i = 0; i < lives; i++){
         image(PlayerHeart,x, 8, 45, 45);
-        //rect(x, 8, 22, 22);
         x += 45;
       }
     }

@@ -32,6 +32,6 @@ class Lazer extends Sprite {
         img = loadImage("data/Bullet.png");
         fill(200, 0, 200);
         image(img, pos.x - 50, pos.y - 300, size.x, size.y);
-        //ellipse(pos.x, pos.y, size.x, size.y);
+        //ellipse(pos.x, pos.y, size.x, size.y); // hitbox
      }
 }

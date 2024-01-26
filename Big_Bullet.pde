@@ -12,7 +12,6 @@ class BigBullet extends Sprite {
     BigBullet(PVector pos, PVector vel, int team) {
         // constructor chaining
         this(pos.x, pos.y, vel, team); // invoke another own constructor
-        // this refers to the above on line 3
     }
     
     @Override
@@ -36,7 +35,7 @@ class BigBullet extends Sprite {
      void display() {
         img = loadImage("data/Bullet.png");
         fill(200, 0, 200);
-        //ellipse(pos.x, pos.y, size.x, size.y);
+        //ellipse(pos.x, pos.y, size.x, size.y); //hitbox
         image(img, pos.x - 58, pos.y - 18, size.x, size.y);
      }
 }

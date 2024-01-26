@@ -20,7 +20,6 @@ class Turret extends Sprite {
      void update() {
         super.update();
         PVector aim = new PVector(0, -10);
-        //aim = aim.normalize().mult(11); // turn this into a single unit vector, then increase its magnitude
         
         if(millis() - mark > wait) {
             mark = millis();
