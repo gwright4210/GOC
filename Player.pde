@@ -124,6 +124,8 @@ class Player extends Sprite {
             case 'H': if(gameStart == false) levels(); gameStart = true;  break;
             case 'j':
             case 'J': spawnTurret(); break;
+            case 'k':
+            case 'K': boomerang(); break;
         }
     }
    
@@ -147,9 +149,9 @@ class Player extends Sprite {
       if(millis() - mark > clusterdelay){
       PVector aimup = new PVector(0, -5); // up
         _SM.spawn(new Bullet(pos.x, pos.y, aimup, team));
-      PVector aimright = new PVector(1, -5); // up
+      PVector aimright = new PVector(1, -5); // right
         _SM.spawn(new Bullet(pos.x, pos.y, aimright, team));
-      PVector aimleft = new PVector(-1, -5); // up
+      PVector aimleft = new PVector(-1, -5); // left
         _SM.spawn(new Bullet(pos.x, pos.y, aimleft, team));
         mark = millis();
       }
@@ -157,7 +159,7 @@ class Player extends Sprite {
     
     void lazer() { 
       if(millis() - mark > lazerdelay){
-      PVector aim = new PVector(0, -80); // up
+      PVector aim = new PVector(0, -80); // up & fast
         _SM.spawn(new Lazer(pos.x, pos.y, aim, team));
         mark = millis();
       }
@@ -185,4 +187,15 @@ class Player extends Sprite {
          _SM.spawn(new Turret(pos.x, pos.y)); 
       }
     }
+    
+    void boomerang(){
+      
+      _SM.spawn(new Boomerang(pos.x, pos.y, team));
+      
+    }
+    
+    
+    
+    
+    
 }
