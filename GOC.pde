@@ -82,10 +82,13 @@ void keyReleased() {
 void levelOne(){
    enemies = 0;
    
+   _SM.spawn(new Dialga(100, 85));
+   
+   /*
    _SM.spawn(new Shooter(100, 85));
    _SM.spawn(new Shooter(380, 85));
    _SM.spawn(new Invader(240, 150));
-  
+  */
 }
 void levelTwo(){
    //enemies = 5;

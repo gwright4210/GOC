@@ -72,8 +72,6 @@ class Player extends Sprite {
         //ellipse(pos.x, pos.y, size.x, size.y); //turn on to see hitbox
         healthbar();
         displayLevel();
-        
-       
     }
 
     @Override
@@ -124,8 +122,8 @@ class Player extends Sprite {
             case 'H': if(gameStart == false) levels(); gameStart = true;  break;
             case 'j':
             case 'J': spawnTurret(); break;
-            case 'k':
-            case 'K': boomerang(); break;
+            case 'm':
+            case 'M': bomb(); break;
         }
     }
    
@@ -188,13 +186,13 @@ class Player extends Sprite {
       }
     }
     
-    void boomerang(){
-      
-      _SM.spawn(new Boomerang(pos.x, pos.y, team));
-      
+     void bomb() {
+      if(millis() - mark > wait){
+      PVector aim = new PVector(0, -10); // up
+        _SM.spawn(new Bomb(pos.x, pos.y, aim, team));
+        mark = millis();
+      }
     }
-    
-    
     
     
     
