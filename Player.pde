@@ -76,13 +76,15 @@ class Player extends Sprite {
 
     @Override
     void handleCollision() {
-       liveslost += 1;
-       lives -= 1;
-       inDamage = true;
-       damageMark = millis();
-       if(lives <= 0){
-         _SM = new SpriteManager();
-         gameOver = true;
+       if(gameStart == true){
+         liveslost += 1;
+         lives -= 1;
+         inDamage = true;
+         damageMark = millis();
+         if(lives <= 0){
+           _SM = new SpriteManager();
+           gameOver = true;
+         }
        }
     }
 
@@ -189,7 +191,7 @@ class Player extends Sprite {
      void bomb() {
       if(millis() - mark > wait){
       PVector aim = new PVector(0, -10); // up
-        _SM.spawn(new Bomb(pos.x, pos.y, aim, team));
+        _SM.spawn(new Bomb(pos.x, pos.y - 70, aim, 3, 300));
         mark = millis();
       }
     }

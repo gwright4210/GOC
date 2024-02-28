@@ -3,10 +3,13 @@ class Dialga extends Sprite {
     boolean dashed = false;
     // constructor
     int lives = 3;
+    float stompTimer;
     long mark, wait = 3000; // ms
+    float distance;
     Dialga(float x, float y) {
         super(x, y, 100, 40, 2);
         enemies += 1;
+        mark = millis();
     }
     
     void healthbar(){
@@ -15,34 +18,43 @@ class Dialga extends Sprite {
         fill(0, 0, 255);
         rect(x, 8, 45, 22);
         x += 40;
+        
+       text("Distance: ", 20, 660);
+       text(distance, 20, 660);
+      }
+      
+      
+    }
+    
+    void stomp(){
+      if(millis() - stompTimer > 3000){
+       PVector aim = new PVector(0, 10); // down
+        _SM.spawn(new Bomb(pos.x, pos.y, aim, team, 1));
+        stompTimer = millis();
       }
     }
     
-    void dash(){
-      dashed = false;
-      while(dashed == false){
-        for(int i = 0; i < 100; i++){
-          if(pos.x == aimx && pos.y = aimy){
-            dashed = true;
-          }
-          else{ 
-            pos.add(aim);
-          }
-        }
-      
+    void dash(int speed){
+      PVector aim = new PVector(_SM.player.pos.x - this.pos.x, _SM.player.pos.y - this.pos.y);
+      aim = aim.normalize().mult(speed); // turn this into a single unit vector, then increase its magnitude
+      distance = (_SM.player.pos.x - this.pos.x) + (_SM.player.pos.y - this.pos.y)/2;
+      if(distance > 50){
+        pos.add(aim);
+      }
+      else{
+        stomp();
+      }
     }
+    
+    
     
     @Override 
     void update() {
         super.update();
         healthbar();
-        float aimx = _SM.player.pos.x;
-        float aimy = _SM.player.pos.y;
-        PVector aim = new PVector(_SM.player.pos.x - this.pos.x, _SM.player.pos.y - this.pos.y);
-        aim = aim.normalize().mult(8); // turn this into a single unit vector, then increase its magnitude
           if(millis() - mark > 100) {
             mark = millis();
-            dash();
+            dash(15);
           }
     }
     
