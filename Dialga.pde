@@ -20,7 +20,7 @@ class Dialga extends Sprite {
         x += 40;
         
        text("Distance: ", 20, 660);
-       text(distance, 20, 660);
+       text(distance, 120, 660);
       }
       
       
@@ -34,12 +34,16 @@ class Dialga extends Sprite {
       }
     }
     
-    void dash(int speed){
-      PVector aim = new PVector(_SM.player.pos.x - this.pos.x, _SM.player.pos.y - this.pos.y);
-      aim = aim.normalize().mult(speed); // turn this into a single unit vector, then increase its magnitude
-      distance = (_SM.player.pos.x - this.pos.x) + (_SM.player.pos.y - this.pos.y)/2;
-      if(distance > 50){
-        pos.add(aim);
+    void dash(float speed){
+      float getPlayerX = _SM.player.pos.x;
+      float getPlayerY = _SM.player.pos.y;
+      distance = Math.abs((_SM.player.pos.x - this.pos.x)) + Math.abs((_SM.player.pos.y - this.pos.y))/2;
+      if(distance > 150){
+        for(int i = 0; i < 100; i++){
+          PVector aim = new PVector(getPlayerX - this.pos.x, getPlayerY - this.pos.y);
+          aim = aim.normalize().mult(speed/100);
+          pos.add(aim);
+        }
       }
       else{
         stomp();
@@ -48,20 +52,22 @@ class Dialga extends Sprite {
     
     
     
+    //44  // turn this into a single unit vector, then increase its magnitude
+    
     @Override 
     void update() {
         super.update();
         healthbar();
           if(millis() - mark > 100) {
             mark = millis();
-            dash(15);
+            dash(20);
           }
     }
     
     @Override
      void display() {
-        img = loadImage("data/dialgamaster.gif");
-        image(img, pos.x - 45, pos.y - 15, size.x - 5, size.y - 5);
+        img = loadImage("data/jeremybossfr.jpg");
+        image(img, pos.x - 45, pos.y - 15, size.x + 10, size.y + 10);
         enemies();
      }
     

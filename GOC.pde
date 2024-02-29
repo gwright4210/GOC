@@ -40,12 +40,13 @@ void draw() {
 void showControls(){
   fill(255); // set the text color to white
   textSize(25); // set the text size
-  text("Controls - WASD", 20, 540); 
-  text("Shoot - Spacebar", 20, 580);
-  text("Switch between fire types - F", 20, 620);
-  text("BIG SHOT - I", 20, 660);
-  text("Lazer - L", 20, 700);
-  text("Spawn Turret  - J", 20, 740);
+  text("Controls - WASD", 20, 500); 
+  text("Shoot - Spacebar", 20, 540);
+  text("Switch between fire types - F", 20, 580);
+  text("BIG SHOT - I", 20, 620);
+  text("Lazer - L", 20, 660);
+  text("Spawn Turret  - J", 20, 700);
+  text("Shoot Bomb  - K", 20, 740);
   text("Press H to start game", 400, 360);
 }
 

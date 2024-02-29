@@ -124,8 +124,8 @@ class Player extends Sprite {
             case 'H': if(gameStart == false) levels(); gameStart = true;  break;
             case 'j':
             case 'J': spawnTurret(); break;
-            case 'm':
-            case 'M': bomb(); break;
+            case 'k':
+            case 'K': bomb(); break;
         }
     }
    
