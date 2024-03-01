@@ -40,6 +40,7 @@ void draw() {
 void showControls(){
   fill(255); // set the text color to white
   textSize(25); // set the text size
+  textAlign(LEFT);
   text("Controls - WASD", 20, 500); 
   text("Shoot - Spacebar", 20, 540);
   text("Switch between fire types - F", 20, 580);
@@ -59,7 +60,8 @@ void gameReset(){
   liveslost = 0;
   level = 0;
   gameOver = false;
-  levels();
+  gameStart = false;
+  tutorialScreen();
 }
 
 void showGameOverScreen() {
@@ -83,13 +85,13 @@ void keyReleased() {
 void levelOne(){
    enemies = 0;
    
-   _SM.spawn(new Dialga(100, 85));
    
-   /*
+   
+   
    _SM.spawn(new Shooter(100, 85));
    _SM.spawn(new Shooter(380, 85));
    _SM.spawn(new Invader(240, 150));
-  */
+  
 }
 void levelTwo(){
    //enemies = 5;
@@ -121,6 +123,18 @@ void levelFive(){
 }
 
 void levelSix(){
+   enemies = 0;
+   
+   _SM.spawn(new Dialga(100, 85));
+   
+   /*
+   _SM.spawn(new Shooter(100, 85));
+   _SM.spawn(new Shooter(380, 85));
+   _SM.spawn(new Invader(240, 150));
+  */
+}
+
+void levelSeven(){
    //enemies = 1;
    enemies = 0;
    _SM.spawn(new FinalBoss(310, 150));
@@ -185,7 +199,11 @@ void levels(){
         levelSix();
         break;
     }
-    if(level > 6){
+    if(level == 7){// && millis() - timerstart > timer){
+        levelSeven();
+        break;
+    }
+    if(level > 7){
       endscreen();
       break;
     }
