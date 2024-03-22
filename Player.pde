@@ -8,8 +8,10 @@ class Player extends Sprite {
     long shotdelay = 300;
     long clusterdelay = 800;
     long damageMark, damageTime = 600;
-    int lives = 3 - liveslost;
     int turretMax = 1;
+    boolean devAccess = false;
+    boolean bossDead = false;
+
    
     void healthbar(){
       int x = 10;
@@ -126,8 +128,19 @@ class Player extends Sprite {
             case 'J': spawnTurret(); break;
             case 'k':
             case 'K': bomb(); break;
+            case '1': levelSelect(1); break;
+            case '2': levelSelect(2); break;
+            case '3': levelSelect(3); break;
+            case '4': levelSelect(4); break;
+            case '5': levelSelect(5); break;
+            case '6': levelSelect(6); break;
+            case '7': levelSelect(7); break;
+            //case '6': if(devAccess == true) levelSelect(6); break;
+            //case '7': if(bossDead == true) levelSelect(7); break;
         }
     }
+    
+    
    
     void smallshot() {
       if(millis() - smallmark > shotdelay){

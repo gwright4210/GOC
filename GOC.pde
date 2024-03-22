@@ -3,7 +3,7 @@ int turrets, liveslost, level, enemies, lives = 3;
 long timerstart, timer = 3000;
 String leveldisplay = "Level " + level;
 Boolean gameOver = false;
-
+int levelCount = 7;
 Boolean gameStart = false;
 
 void setup() {
@@ -85,12 +85,12 @@ void keyReleased() {
 void levelOne(){
    enemies = 0;
    
+   _SM.spawn(new ExtraLife(100, 500));
    
    
-   
-   _SM.spawn(new Shooter(100, 85));
-   _SM.spawn(new Shooter(380, 85));
-   _SM.spawn(new Invader(240, 150));
+   //_SM.spawn(new Shooter(100, 85));
+   //_SM.spawn(new Shooter(380, 85));
+   //_SM.spawn(new Invader(240, 150));
   
 }
 void levelTwo(){
@@ -148,12 +148,12 @@ void endscreen(){
 
 void displayLevel(){
   leveldisplay = "Level " + level;
-  if(level > 6 && liveslost == 0){
+  if(level > levelCount && liveslost == 0){
     leveldisplay = "Perfect Game!";
     textSize(80);
     text(leveldisplay, 300, 150);
   }
-  if(level > 6 && liveslost >= 1){
+  if(level > levelCount && liveslost >= 1){
     leveldisplay = "You Won!";
     textSize(80);
     text(leveldisplay, 340, 150);
@@ -174,32 +174,72 @@ void levels(){
   turrets = 0;
    _SM = new SpriteManager();
   level += 1;
-  while(1 == 1){// && millis() - timerstart > timer){
+  while(1 == 1){
     if(level == 1){
       levelOne();
       break;
     }
-    if(level == 2){// && millis() - timerstart > timer){
+    if(level == 2){
         levelTwo();
         break;
     }
-    if(level == 3){// && millis() - timerstart > timer){
+    if(level == 3){
         levelThree();
         break;
     }
-    if(level == 4){// && millis() - timerstart > timer){
+    if(level == 4){
         levelFour();
         break;
     }
-    if(level == 5){// && millis() - timerstart > timer){
+    if(level == 5){
         levelFive();
         break;
     }
-    if(level == 6){// && millis() - timerstart > timer){
+    if(level == 6){
         levelSix();
         break;
     }
-    if(level == 7){// && millis() - timerstart > timer){
+    if(level == 7){
+        levelSeven();
+        break;
+    }
+    if(level > 7){
+      endscreen();
+      break;
+    }
+  }
+}
+
+void levelSelect(int l){
+  turrets = 0;
+   _SM = new SpriteManager();
+  level = l;
+  while(1 == 1){
+    if(level == 1){
+      levelOne();
+      break;
+    }
+    if(level == 2){
+        levelTwo();
+        break;
+    }
+    if(level == 3){
+        levelThree();
+        break;
+    }
+    if(level == 4){
+        levelFour();
+        break;
+    }
+    if(level == 5){
+        levelFive();
+        break;
+    }
+    if(level == 6){
+        levelSix();
+        break;
+    }
+    if(level == 7){
         levelSeven();
         break;
     }

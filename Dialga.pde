@@ -19,8 +19,8 @@ class Dialga extends Sprite {
         rect(x, 8, 45, 22);
         x += 40;
         
-       text("Distance: ", 20, 660);
-       text(distance, 120, 660);
+       //text("Distance: ", 20, 660);
+       //text(distance, 120, 660);
       }
       
       
