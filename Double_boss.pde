@@ -6,7 +6,6 @@ class DoubleBoss extends Invader {
     DoubleBoss(float x, float y) {
         super(x, y);
         mark = millis();
-        enemies += lives - 1;
         spawnTimer = millis();
     }    
     
@@ -38,14 +37,23 @@ class DoubleBoss extends Invader {
     @Override
     void handleCollision(){
       lives -= 1;
-      enemies -= 1;
       if(lives <= 0){
+         enemies -= 1;
          xdeath = pos.x;
          ydeath = pos.y;
         _SM.destroy(this);
-        _SM.spawn(new MiniBoss(xdeath + 100, ydeath));
-        _SM.spawn(new MiniBoss(xdeath - 100, ydeath));
-       
+        if(xdeath < 150){
+          _SM.spawn(new MiniBoss(xdeath + 100, ydeath));
+          _SM.spawn(new MiniBoss(xdeath + 200, ydeath));
+        }
+        if(xdeath > 950){
+          _SM.spawn(new MiniBoss(xdeath - 100, ydeath));
+          _SM.spawn(new MiniBoss(xdeath - 200, ydeath));
+        }
+        else{
+          _SM.spawn(new MiniBoss(xdeath + 100, ydeath));
+          _SM.spawn(new MiniBoss(xdeath - 100, ydeath));
+        }
       }
     }
 }

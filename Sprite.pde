@@ -32,6 +32,10 @@ class Sprite {
         
     }
     
+    void handleCollision(Sprite other) {
+      handleCollision();
+    }
+    
     void handleCollision() {
         _SM.destroy(this);
     }

@@ -1,7 +1,7 @@
-class ExtraLife extends Powerup {
+class LazerBuff extends Powerup {
     PImage img;  
     // constructor
-    ExtraLife(float x, float y) {
+    LazerBuff(float x, float y) {
         super(x, y, 50, 30, 2);
         //vel = new PVector(5, 0); // moving right
         

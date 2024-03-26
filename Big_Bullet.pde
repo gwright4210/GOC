@@ -20,7 +20,6 @@ class BigBullet extends Sprite {
       if(collisionsAllowed < collisions){
         _SM.destroy(this);
       }
-      
     }
     
     @Override

@@ -84,9 +84,7 @@ void keyReleased() {
 
 void levelOne(){
    enemies = 0;
-   
-   _SM.spawn(new ExtraLife(100, 500));
-   
+   _SM.spawn(new LazerBuff(200, 500));
    
    //_SM.spawn(new Shooter(100, 85));
    //_SM.spawn(new Shooter(380, 85));

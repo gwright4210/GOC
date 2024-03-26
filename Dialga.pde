@@ -22,8 +22,6 @@ class Dialga extends Sprite {
        //text("Distance: ", 20, 660);
        //text(distance, 120, 660);
       }
-      
-      
     }
     
     void stomp(){
@@ -74,10 +72,11 @@ class Dialga extends Sprite {
     @Override
      void handleCollision() {
         lives -= 1;
-      enemies -= 1;
+      
       if(lives <= 0){
         _SM.destroy(this);
         levels();
+        enemies -= 1;
       }
     }
 }

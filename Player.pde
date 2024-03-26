@@ -11,19 +11,24 @@ class Player extends Sprite {
     int turretMax = 1;
     boolean devAccess = false;
     boolean bossDead = false;
+    boolean buff = false;
+    long buffTimer, buffMark;
+    int activePowerups = 0;
+    
 
-   
     void healthbar(){
       int x = 10;
+      int z = 10;
       PlayerHeart = loadImage("data/Player_Heart.gif");
       for(int i = 0; i < lives; i++){
         image(PlayerHeart,x, 8, 45, 45);
         x += 45;
       }
+      for(int xz = 0; xz < activePowerups; xz++){
+        image(PlayerHeart, z, 40, 45, 45);
+        z += 45;
+      }
     }
-    
-    
-   
     
     Player(float x, float y) {
         // super refers to the parent
@@ -51,6 +56,15 @@ class Player extends Sprite {
 
         // always try to decelerate
         vel.mult(0.9);
+        
+        //Update for PowerUps
+        if(millis() - buffMark > buffTimer){
+          buff = false;
+        }
+        if(buff == false){
+          lazerdelay = 8000;
+          activePowerups -= 1;
+        }
     }
     
     void damage(){
@@ -74,6 +88,19 @@ class Player extends Sprite {
         //ellipse(pos.x, pos.y, size.x, size.y); //turn on to see hitbox
         healthbar();
         displayLevel();
+    }
+    
+    @Override
+    void handleCollision(Sprite other) {
+      if(other instanceof ExtraLife) {
+        lives += 1;
+      }
+      if(other instanceof LazerBuff){
+        lazerBuff(15000);
+      }
+      else {
+        handleCollision();
+      }
     }
 
     @Override
@@ -209,6 +236,13 @@ class Player extends Sprite {
       }
     }
     
-    
+    //powerUp
+    void lazerBuff(long dur){
+      buff = true;
+      buffMark = millis();
+      lazerdelay = 3000;
+      buffTimer = dur;
+      activePowerups += 1;
+    }
     
 }

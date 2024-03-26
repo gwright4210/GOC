@@ -24,8 +24,6 @@ class Bullet extends Sprite {
         image(img, pos.x - 5, pos.y - 3, size.x, size.y);
      }
     
-    
-    
     @Override
     void update() {
         pos.add(vel);

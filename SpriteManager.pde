@@ -41,8 +41,8 @@ class SpriteManager {
                 Sprite a = active.get(i);
                 Sprite b = active.get(j);
                 if (a.team != b.team && collision(a, b)) {
-                    active.get(i).handleCollision();
-                    active.get(j).handleCollision();
+                    a.handleCollision(b);
+                    b.handleCollision(a);
                 }
             }
         }
