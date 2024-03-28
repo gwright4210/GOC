@@ -4,7 +4,7 @@ long timerstart, timer = 3000;
 String leveldisplay = "Level " + level;
 Boolean gameOver = false;
 int levelCount = 7;
-Boolean gameStart = false;
+Boolean TurretUpgrade = false, gameStart = false;
 
 void setup() {
     
@@ -83,17 +83,18 @@ void keyReleased() {
 }
 
 void levelOne(){
-   enemies = 0;
-   _SM.spawn(new LazerBuff(200, 500));
    
-   //_SM.spawn(new Shooter(100, 85));
-   //_SM.spawn(new Shooter(380, 85));
-   //_SM.spawn(new Invader(240, 150));
+   
+   
+   
+   _SM.spawn(new Shooter(100, 85));
+   _SM.spawn(new Shooter(380, 85));
+   _SM.spawn(new Invader(240, 150));
   
 }
 void levelTwo(){
    //enemies = 5;
-   enemies = 0;
+   
    _SM.spawn(new Shooter(100, 70));
    _SM.spawn(new Shooter(300, 250));
    _SM.spawn(new Shooter(500, 160));
@@ -101,29 +102,31 @@ void levelTwo(){
 }
 void levelThree(){
    //enemies = 1;
-   enemies = 0;
+   
    _SM.spawn(new MiniBoss(310, 150));
+   _SM.spawn(new TurretBuff(200, 500));
    
 }
 
 void levelFour(){
    //enemies = 5; //enemy has 5 lives, thus counts as 5 enemies
-   enemies = 0;
+   
    _SM.spawn(new DoubleBoss(310, 150));
    
 }
 
 void levelFive(){
   // enemies = 2; // has 2 lives
-   enemies = 0;
+ 
    _SM.spawn(new Boss(310, 150));
    
 }
 
 void levelSix(){
-   enemies = 0;
+   
    
    _SM.spawn(new Dialga(100, 85));
+   _SM.spawn(new LazerBuff(500, 500));
    
    /*
    _SM.spawn(new Shooter(100, 85));
@@ -134,14 +137,13 @@ void levelSix(){
 
 void levelSeven(){
    //enemies = 1;
-   enemies = 0;
+   
    _SM.spawn(new FinalBoss(310, 150));
    
 }
 
 void endscreen(){
-   //enemies = 1;
-   enemies = 0;
+   
 }
 
 void displayLevel(){
@@ -169,6 +171,7 @@ void playerReset(){
 }
 
 void levels(){
+  enemies = 0;
   turrets = 0;
    _SM = new SpriteManager();
   level += 1;

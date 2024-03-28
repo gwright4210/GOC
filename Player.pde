@@ -1,7 +1,7 @@
 class Player extends Sprite {
     PImage img;
     PImage damage;
-    PImage PlayerHeart;
+    PImage PlayerHeart, LazerBuff;
     boolean left, right, up, down, inDamage, basicShot = true ;
     long mark, smallmark, wait = 3000;
     long lazerdelay = 8000;
@@ -15,19 +15,22 @@ class Player extends Sprite {
     long buffTimer, buffMark;
     int activePowerups = 0;
     
+    
 
     void healthbar(){
       int x = 10;
-      int z = 10;
+      int y = 10;
       PlayerHeart = loadImage("data/Player_Heart.gif");
+      LazerBuff = loadImage("data/LazerBuff.png");
       for(int i = 0; i < lives; i++){
         image(PlayerHeart,x, 8, 45, 45);
         x += 45;
       }
-      for(int xz = 0; xz < activePowerups; xz++){
-        image(PlayerHeart, z, 40, 45, 45);
-        z += 45;
+      for(int z = 0; z < activePowerups; z++){
+        image(LazerBuff, y, 50, 45, 45);
+        y += 45;
       }
+     
     }
     
     Player(float x, float y) {
@@ -63,7 +66,7 @@ class Player extends Sprite {
         }
         if(buff == false){
           lazerdelay = 8000;
-          activePowerups -= 1;
+          activePowerups = 0;
         }
     }
     
@@ -92,13 +95,17 @@ class Player extends Sprite {
     
     @Override
     void handleCollision(Sprite other) {
-      if(other instanceof ExtraLife) {
+      if(other instanceof TurretBuff){
+        TurretUpgrade = true;
+      }
+      else if(other instanceof ExtraLife) {
         lives += 1;
       }
-      if(other instanceof LazerBuff){
+      else if(other instanceof LazerBuff){
         lazerBuff(15000);
       }
       else {
+        print("Player.handleCollision(other).else");
         handleCollision();
       }
     }
@@ -224,7 +231,12 @@ class Player extends Sprite {
     
     void spawnTurret(){
       if(turrets < turretMax){ 
+        if(TurretUpgrade == true){
+         _SM.spawn(new TurretUpgrade(pos.x, pos.y)); 
+        }
+        if(TurretUpgrade == false){
          _SM.spawn(new Turret(pos.x, pos.y)); 
+        }
       }
     }
     

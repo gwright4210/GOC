@@ -1,7 +1,7 @@
-class LazerBuff extends Powerup {
+class TurretBuff extends Powerup {
     PImage img;  
     // constructor
-    LazerBuff(float x, float y) {
+    TurretBuff(float x, float y) {
         super(x, y, 50, 30, 2);
         //vel = new PVector(5, 0); // moving right
         
