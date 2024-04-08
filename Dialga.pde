@@ -37,12 +37,16 @@ class Dialga extends Sprite {
       float getPlayerY = _SM.player.pos.y;
       distance = Math.abs((_SM.player.pos.x - this.pos.x)) + Math.abs((_SM.player.pos.y - this.pos.y))/2;
       if(distance > 150){
-        for(int i = 0; i < 100; i++){
-          PVector aim = new PVector(getPlayerX - this.pos.x, getPlayerY - this.pos.y);
-          aim = aim.normalize().mult(speed/100);
-          pos.add(aim);
-        }
-      }
+          for(int i = 0; i < 100; i++){
+            PVector aim = new PVector(getPlayerX - this.pos.x, getPlayerY - this.pos.y);
+            if(speed > 0){
+              aim = aim.normalize().mult(speed/100);
+            }
+            if(speed <= 0){
+            aim = aim.normalize().mult(.1);}
+            pos.add(aim);
+          }
+       }
       else{
         stomp();
       }
@@ -58,7 +62,7 @@ class Dialga extends Sprite {
         healthbar();
           if(millis() - mark > 100) {
             mark = millis();
-            dash(20);
+            dash(0);
           }
     }
     
