@@ -62,7 +62,7 @@ class Dialga extends Sprite {
         healthbar();
           if(millis() - mark > 100) {
             mark = millis();
-            dash(0);
+            dash(20);
           }
     }
     

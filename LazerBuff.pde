@@ -15,7 +15,7 @@ class LazerBuff extends Powerup {
     
     @Override
      void display() {
-        img = loadImage("data/LazerBuff.png");
+        img = loadImage("data/lazerPowerup.png");
         image(img, pos.x - 45, pos.y - 15, size.x + 5 , size.y + 10);
      }
     

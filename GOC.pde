@@ -83,7 +83,7 @@ void keyReleased() {
 }
 
 void levelOne(){
-   enemies = 3;
+   //enemies = 3;
    
    
    
@@ -93,7 +93,7 @@ void levelOne(){
   
 }
 void levelTwo(){
-   enemies = 5;
+   //enemies = 5;
    
    _SM.spawn(new Shooter(100, 70));
    _SM.spawn(new Shooter(300, 250));
@@ -101,7 +101,7 @@ void levelTwo(){
    
 }
 void levelThree(){
-   enemies = 1;
+   //enemies = 1;
    
    _SM.spawn(new MiniBoss(310, 150));
    _SM.spawn(new TurretBuff(200, 500));
@@ -109,21 +109,21 @@ void levelThree(){
 }
 
 void levelFour(){
-   enemies = 5; //enemy has 5 lives, thus counts as 5 enemies
+   //enemies = 5; //enemy has 5 lives, thus counts as 5 enemies
    
    _SM.spawn(new DoubleBoss(310, 150));
    
 }
 
 void levelFive(){
-   enemies = 2; // has 2 lives
+   //enemies = 2; // has 2 lives
  
    _SM.spawn(new Boss(310, 150));
    
 }
 
 void levelSix(){
-   enemies = 1;
+   //enemies = 1;
    
    _SM.spawn(new Dialga(100, 85));
    _SM.spawn(new LazerBuff(500, 500));
@@ -136,7 +136,7 @@ void levelSix(){
 }
 
 void levelSeven(){
-   enemies = 1;
+   //enemies = 1;
    
    _SM.spawn(new FinalBoss(310, 150));
    
@@ -212,6 +212,7 @@ void levels(){
 }
 
 void levelSelect(int l){
+  enemies = 0;
   turrets = 0;
    _SM = new SpriteManager();
   level = l;

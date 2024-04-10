@@ -21,7 +21,7 @@ class Player extends Sprite {
       int x = 10;
       int y = 10;
       PlayerHeart = loadImage("data/Player_Heart.gif");
-      LazerBuff = loadImage("data/LazerBuff.png");
+      LazerBuff = loadImage("data/lazerPowerup.png");
       for(int i = 0; i < lives; i++){
         image(PlayerHeart,x, 8, 45, 45);
         x += 45;
